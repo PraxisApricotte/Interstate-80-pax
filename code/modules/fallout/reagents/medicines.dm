@@ -573,7 +573,7 @@
 		ADD_TRAIT(M, TRAIT_SURGERY_LOW, "mentats")
 		ADD_TRAIT(M, TRAIT_TECHNOPHREAK, "mentats")
 
-/datum/reagent/medicine/mentat/on_mob_add(mob/living/carbon/M)
+/datum/reagent/medicine/mentat/on_mob_delete(mob/living/carbon/M)
 	..()
 	if(isliving(M))
 		to_chat(M, "<span class='notice'>You feel like your, your thing, you know, you're deflate like a popped balloon.</span>")
