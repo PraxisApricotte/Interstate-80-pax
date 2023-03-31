@@ -576,7 +576,7 @@
 /datum/reagent/medicine/mentat/on_mob_add(mob/living/carbon/M)
 	..()
 	if(isliving(M))
-	to_chat(M, "<span class='notice'>You feel like your deflate like a popped balloon.</span>")
+	to_chat(M, "<span class='notice'>You feel like your, your thing, you know, you're deflate like a popped balloon.</span>")
 	REMOVE_TRAIT(M, TRAIT_CHEMWHIZ, "mentats")
 	REMOVE_TRAIT(M, TRAIT_SURGERY_LOW, "mentats")
 	REMOVE_TRAIT(M, TRAIT_TECHNOPHREAK, "mentats")
