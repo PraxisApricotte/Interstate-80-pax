@@ -262,8 +262,7 @@
 
 /obj/item/reagent_containers/pill/mentat
 	name = "Mentat"
-	desc = "A chalky pill that induces increased memory and cognitive functions, as well as heightened perception and creative faculties. \
-	Also known for fixing eye damage and blindness, for some reason."
+	desc = "A chalky pill that induces increased memory and cognitive functions, as well as heightened perception and creative faculties."
 	icon = 'icons/fallout/objects/medicine/drugs.dmi'
 	icon_state = "pill_mentat"
 	list_reagents = list(/datum/reagent/medicine/mentat = 10)
