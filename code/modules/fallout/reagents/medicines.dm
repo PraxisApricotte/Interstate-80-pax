@@ -555,43 +555,36 @@
 // MENTAT REAGENT
 
 /datum/reagent/medicine/mentat
-	name = "Mentat Powder"
+	name = "Mentat powder"
 
-	description = "A powerful drug that heals and increases the perception and intelligence of the user."
+	description = "A powerful drug that increases the perception and intelligence of the user."
 	color = "#C8A5DC"
+	taste_description = "mint"
 	reagent_state = SOLID
 	overdose_threshold = 25
 	addiction_threshold = 15
 	ghoulfriendly = TRUE
 
-/datum/reagent/medicine/mentat/on_mob_life(mob/living/carbon/M)
-	M.adjustOxyLoss(-3*REAGENTS_EFFECT_MULTIPLIER)
-	var/obj/item/organ/eyes/eyes = M.getorganslot(ORGAN_SLOT_EYES)
-	if (!eyes)
-		return
-	if(M.getOrganLoss(ORGAN_SLOT_BRAIN) == 0)
-		M.cure_all_traumas(TRAUMA_RESILIENCE_SURGERY)
-/*	if(HAS_TRAIT(M, TRAIT_BLIND, TRAIT_GENERIC))
-		if(prob(20))
-			to_chat(M, "<span class='warning'>Your vision slowly returns...</span>")
-			M.cure_blind(EYE_DAMAGE)
-			M.cure_nearsighted(EYE_DAMAGE)
-			M.blur_eyes(35)
-	else if(HAS_TRAIT(M, TRAIT_NEARSIGHT, TRAIT_GENERIC))
-		to_chat(M, "<span class='warning'>The blackness in your peripheral vision fades.</span>")
-		M.cure_nearsighted(EYE_DAMAGE)
-		M.blur_eyes(10)*/
-	else if(M.eye_blind || M.eye_blurry)
-		M.set_blindness(0)
-		M.set_blurriness(0)
-		to_chat(M, "<span class='warning'>Your vision slowly returns to normal...</span>")
-//	else if(eyes.eye_damage > 0)
-//		M.adjust_eye_damage(-1)
-//	M.adjustOrganLoss(ORGAN_SLOT_BRAIN, -2)
-	if (prob(5))
-		to_chat(M, "<span class='notice'>You feel way more intelligent!</span>")
+/datum/reagent/medicine/mentat/on_mob_add(mob/living/carbon/M)
 	..()
-	. = TRUE
+	if(isliving(M))
+	to_chat(M, "<span class='notice'>You feel like your head gets smart but your brain gets dumb.</span>")
+	ADD_TRAIT(M, TRAIT_CHEMWHIZ, "mentats")
+	ADD_TRAIT(M, TRAIT_SURGERY_LOW, "mentats")
+	ADD_TRAIT(M, TRAIT_TECHNOPHREAK, "mentats")
+
+/datum/reagent/medicine/mentat/on_mob_add(mob/living/carbon/M)
+	..()
+	if(isliving(M))
+	to_chat(M, "<span class='notice'>You feel like your deflate like a popped balloon.</span>")
+	REMOVE_TRAIT(M, TRAIT_CHEMWHIZ, "mentats")
+	REMOVE_TRAIT(M, TRAIT_SURGERY_LOW, "mentats")
+	REMOVE_TRAIT(M, TRAIT_TECHNOPHREAK, "mentats")
+
+/datum/reagent/medicine/mentat/on_mob_life(mob/living/carbon/M)
+	if(prob(33))
+		M.adjustOrganLoss(ORGAN_SLOT_BRAIN, 2)
+	..()
 
 /datum/reagent/medicine/mentat/overdose_process(mob/living/M)
 	M.adjustOrganLoss(ORGAN_SLOT_BRAIN, 15)
